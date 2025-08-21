@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SmobilPay Payment Provider Configuration Form -->
+    <record id="payment_provider_smobilpay_form" model="ir.ui.view">
+        <field name="name">payment.provider.form.smobilpay</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='provider_credentials']" position="after">
+                <group attrs="{'invisible': [('code', '!=', 'smobilpay')]}" name="smobilpay_credentials">
+                    <field name="smobilpay_consumer_key" required="1" password="False"/>
+                    <field name="smobilpay_consumer_secret" required="1" password="True"/>
+                    <field name="smobilpay_webhook_secret" password="True"/>
+                    <field name="smobilpay_api_url" readonly="1"/>
+                </group>
+            </xpath>
+            <xpath expr="//group[@name='provider_credentials']" position="after">
+                <group attrs="{'invisible': [('code', '!=', 'smobilpay')]}" name="smobilpay_actions" col="1">
+                    <button name="action_test_smobilpay_connection" 
+                            string="Test Connection" 
+                            type="object" 
+                            class="btn-secondary"
+                            attrs="{'invisible': ['|', ('smobilpay_consumer_key', '=', False), ('smobilpay_consumer_secret', '=', False)]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- SmobilPay Payment Transaction Extended Form -->
+    <record id="payment_transaction_smobilpay_form" model="ir.ui.view">
+        <field name="name">payment.transaction.form.smobilpay</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='provider_details']" position="after">
+                <group attrs="{'invisible': [('provider_code', '!=', 'smobilpay')]}" 
+                       name="smobilpay_details" string="SmobilPay Details" col="2">
+                    <field name="smobilpay_payment_id"/>
+                    <field name="smobilpay_merchant_reference"/>
+                    <field name="smobilpay_payment_method"/>
+                    <field name="smobilpay_phone_number"/>
+                    <field name="smobilpay_status_details" widget="text" colspan="2"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- SmobilPay Payment Transaction Extended Tree View -->
+    <record id="payment_transaction_smobilpay_tree" model="ir.ui.view">
+        <field name="name">payment.transaction.tree.smobilpay</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='provider_reference']" position="after">
+                <field name="smobilpay_payment_method" 
+                       attrs="{'column_invisible': [('parent.provider_code', '!=', 'smobilpay')]}"/>
+                <field name="smobilpay_phone_number"
+                       attrs="{'column_invisible': [('parent.provider_code', '!=', 'smobilpay')]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
