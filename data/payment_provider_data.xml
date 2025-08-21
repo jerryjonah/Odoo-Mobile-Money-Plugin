@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- SmobilPay Payment Provider -->
+        <record id="payment_provider_smobilpay" model="payment.provider">
+            <field name="name">SmobilPay Mobile Money</field>
+            <field name="code">smobilpay</field>
+            <field name="state">disabled</field>
+            <field name="is_published">False</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="main_currency_id" ref="base.XAF"/>
+            <field name="supported_currency_ids" eval="[(6, 0, [
+                ref('base.XAF'),
+                ref('base.EUR'), 
+                ref('base.USD')
+            ])]"/>
+            <field name="supported_country_ids" eval="[(6, 0, [
+                ref('base.cm'),
+                ref('base.td'),
+                ref('base.cf'), 
+                ref('base.cg'),
+                ref('base.ga'),
+                ref('base.gq')
+            ])]"/>
+            <field name="payment_icon_ids" eval="[(6, 0, [
+                ref('payment.payment_icon_cc_mastercard'),
+                ref('payment.payment_icon_cc_visa')
+            ])]"/>
+            <field name="allow_tokenization">False</field>
+            <field name="capture_manually">False</field>
+            <field name="allow_express_checkout">False</field>
+            <field name="redirect_form_view_id" ref="smobilpay_redirect_form"/>
+            <field name="inline_form_view_id" ref="smobilpay_inline_form"/>
+        </record>
+    </data>
+</odoo>

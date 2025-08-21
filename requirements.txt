@@ -1,0 +1,26 @@
+# SmobilPay Odoo Gateway Dependencies
+# These packages are required for the addon to function properly
+
+# HTTP client for API communications
+requests>=2.25.0
+
+# Cryptographic functions for webhook verification  
+cryptography>=3.4.0
+
+# URL manipulation utilities (usually included in Odoo)
+werkzeug>=2.0.0
+
+# JSON handling (built-in Python, listed for completeness)
+# json
+
+# HMAC for signature verification (built-in Python)
+# hmac
+
+# UUID generation (built-in Python)
+# uuid
+
+# Datetime handling (built-in Python) 
+# datetime
+
+# Logging utilities (built-in Python)
+# logging

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payment_provider_smobilpay,payment.provider.smobilpay,payment.model_payment_provider,base.group_system,1,1,1,1
+access_payment_transaction_smobilpay,payment.transaction.smobilpay,payment.model_payment_transaction,base.group_system,1,1,1,0
